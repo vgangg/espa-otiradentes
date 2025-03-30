@@ -5,6 +5,9 @@ import { Dumbbell, Users, Brain, Shield } from 'lucide-react';
 const MartialArts = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  // Verifica se está em dispositivo móvel (largura menor que 768px)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   const arts = [
     {
       title: 'Muay Thai',
@@ -108,7 +111,7 @@ const MartialArts = () => {
                         <motion.li
                           key={idx}
                           initial={{ opacity: 0, x: -20 }}
-                          animate={hoveredCard === index ? { opacity: 1, x: 0 } : {}}
+                          animate={hoveredCard === index || isMobile ? { opacity: 1, x: 0 } : {}}
                           transition={{ duration: 0.3, delay: idx * 0.1 }}
                           className="flex items-center gap-2 text-xs md:text-sm text-gray-400"
                         >
@@ -128,7 +131,7 @@ const MartialArts = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
           {arts.slice(3).map((art, index) => (
             <motion.div
-              key={index + 3} // Garantir a chave única
+              key={index + 3}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
@@ -167,7 +170,7 @@ const MartialArts = () => {
                         <motion.li
                           key={idx + 3}
                           initial={{ opacity: 0, x: -20 }}
-                          animate={hoveredCard === index + 3 ? { opacity: 1, x: 0 } : {}}
+                          animate={hoveredCard === index + 3 || isMobile ? { opacity: 1, x: 0 } : {}}
                           transition={{ duration: 0.3, delay: (idx + 3) * 0.1 }}
                           className="flex items-center gap-2 text-xs md:text-sm text-gray-400"
                         >
